@@ -45,6 +45,11 @@ spec:
             httpGet:
               path: /
               port: http
+          envFrom:
+            - secretRef:
+                name: {{ include "rails.fullname" . }}
+            - configMapRef:
+                name: {{ include "rails.fullname" . }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
